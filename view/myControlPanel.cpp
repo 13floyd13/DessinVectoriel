@@ -17,7 +17,8 @@ enum
 	ID_SAVE,
 	ID_BUTTON1,
 	ID_SLIDER1,
-	ID_CHECKBOX1
+	ID_CHECKBOX1,
+	ID_COLORPICKER1
 };
 
 //------------------------------------------------------------------------
@@ -44,6 +45,12 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	y+= WIDGET_Y_STEP ;
 	m_checkBox = new wxCheckBox(this, ID_CHECKBOX1, "Show (x,y)", wxPoint(10, y), wxSize(100,20)) ;
 	Bind(wxEVT_CHECKBOX, &MyControlPanel::OnCheckBox, this, ID_CHECKBOX1) ;
+
+	// ajout du colorpicker
+	y+= WIDGET_Y_STEP ;
+	wxColour green(117, 0, 0);
+	m_colourPicker = new wxColourPickerCtrl(this, ID_COLORPICKER1, green, wxPoint(10, y), wxSize(100,20));
+	Bind(wxEVT_COLOURPICKER_CHANGED, &MyControlPanel::OnColorChange, this, ID_COLORPICKER1);
 }
 
 //------------------------------------------------------------------------
@@ -70,4 +77,10 @@ void MyControlPanel::OnCheckBox(wxCommandEvent &event)
 {
 	MyFrame* frame = (MyFrame*)GetParent() ;
 	frame->RefreshDrawing() ;	// update the drawing panel
+}
+
+void MyControlPanel::OnColorChange(wxColourPickerEvent &event)
+{
+    MyFrame* frame = (MyFrame*)GetParent() ;
+    frame->RefreshDrawing() ;
 }

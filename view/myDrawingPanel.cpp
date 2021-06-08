@@ -24,6 +24,7 @@ MyDrawingPanel::MyDrawingPanel(wxWindow *parent) : wxPanel(parent)
 	m_onePoint.x = (w-WIDGET_PANEL_WIDTH)/2 ;
 	m_onePoint.y = h/2 ;
 	m_mousePoint = m_onePoint ;
+    MyFrame* frame = (MyFrame*)GetParent() ;
 }
 
 //------------------------------------------------------------------------
@@ -57,9 +58,13 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 	MyFrame* frame =  (MyFrame*)GetParent() ;
 	int radius = frame->GetControlPanel()->GetSliderValue() ;
 	bool check = frame->GetControlPanel()->GetCheckBoxValue() ;
+    wxColour m_colour = frame->GetControlPanel()->GetColour();
 
 	// then paint
 	wxPaintDC dc(this);
+
+
+	dc.SetPen(wxPen(m_colour));
 
 	dc.DrawLine(m_mousePoint, m_onePoint) ;
 	dc.DrawRectangle(wxPoint(m_onePoint.x-radius/2, m_onePoint.y-radius/2), wxSize(radius,radius)) ;
