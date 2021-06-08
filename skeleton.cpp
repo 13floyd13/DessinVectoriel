@@ -36,7 +36,7 @@
 #include <wx/file.h>
 #include <wx/bitmap.h>
 
-#include "modele/myApp.h"
+#include "view/myApp.h"
 #include "view/myFrame.h"
 #include "view/myDrawingPanel.h"
 #include "view/myControlPanel.h"

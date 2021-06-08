@@ -12,9 +12,9 @@
 #include <wx/file.h>
 #include <wx/bitmap.h>
 
-#include "../view/myFrame.h"
-#include "../view/myDrawingPanel.h"
-#include "../view/myControlPanel.h"
+#include "myFrame.h"
+#include "myDrawingPanel.h"
+#include "myControlPanel.h"
 
 
 class MyApp: public wxApp
