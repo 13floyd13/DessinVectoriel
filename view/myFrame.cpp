@@ -39,6 +39,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 
 	wxMenuBar *menuBar = new wxMenuBar();
 	menuBar->Append(fileMenu, wxT("&File"));
+	
 
 	Bind(wxEVT_MENU, &MyFrame::OnOpenFile, this, ID_LOAD);
 	Bind(wxEVT_MENU, &MyFrame::OnSaveFile, this, ID_SAVE);

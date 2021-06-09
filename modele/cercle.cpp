@@ -6,14 +6,12 @@
 #include <math.h>
 
 
-/
-Cercle::Cercle(Point centre, int radius, string label) :
+
+Cercle::Cercle(Point centre, int radius, std::string label) :
         Forme(label),
         m_center(centre),
-        m_radius(radius)
-{
-    m_circleCount++;
-}
+        m_radius(radius){}
+
 
 /*Cercle::Cercle()
 {
@@ -37,7 +35,7 @@ Cercle &Cercle::operator=(const Cercle &other)
 }
 
 
-float Cercle::Surface() const
+/*float Cercle::Surface() const
 {
     return m_radius * m_radius * (float)M_PI;
 }
@@ -55,6 +53,6 @@ float Cercle::Perimeter() const
 const Point& Cercle::GetCentre(){
     return m_center;
 }
-const Cercle::GetRadius(){
+const int Cercle::GetRadius(){
     return m_radius;
 }
