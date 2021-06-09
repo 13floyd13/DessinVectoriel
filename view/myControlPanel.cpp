@@ -33,7 +33,7 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	SetBackgroundColour(*wxLIGHT_GREY) ;
 
 	y = WIDGET_Y0 ;
-	m_button = new wxButton(this, ID_BUTTON1, wxT("Click me"), wxPoint(10, y)) ;
+	m_button = new wxButton(this, ID_BUTTON1, wxT("Click Me"), wxPoint(10, y)) ;
 	Bind(wxEVT_BUTTON, &MyControlPanel::OnButton, this, ID_BUTTON1) ;
 
 	y+= WIDGET_Y_STEP ;
@@ -55,7 +55,7 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	// ajout du choix de la forme
 	m_shapes.Add("Rectangle");
 	m_shapes.Add("Cercle");
-	m_shapes.Add("Triangle");
+//	m_shapes.Add("Triangle");
 	y+= WIDGET_Y_STEP;
 	m_comboBox = new wxComboBox(this, ID_COMBOBOX1, wxT("Rectangle"), wxPoint(10, y), wxDefaultSize, m_shapes, wxCB_READONLY);
 	Bind(wxEVT_COMBOBOX, &MyControlPanel::OnShapeChoose, this, ID_COMBOBOX1);
@@ -68,7 +68,7 @@ void MyControlPanel::OnButton(wxCommandEvent &event)
 //	char* s = GetCString() ;
 //	wxMessageBox(wxString::FromAscii(s)) ; // call a C function located in the sample.cp module
 //	free(s) ;
-	wxMessageBox(wxT("You just pressed the button!")) ;
+//	wxMessageBox(wxT("You just pressed the button!")) ;
 }
 
 //------------------------------------------------------------------------

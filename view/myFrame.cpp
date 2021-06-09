@@ -19,9 +19,7 @@ enum
 	ID_ABOUT,
 	ID_LOAD,
 	ID_SAVE,
-	ID_BUTTON1,
-	ID_SLIDER1,
-	ID_CHECKBOX1
+	ID_NEW
 };
 
 //------------------------------------------------------------------------
@@ -31,6 +29,7 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 // The constructor of the main frame that creates the menu stuffs and the 2 panels
 {
 	wxMenu *fileMenu = new wxMenu();
+    fileMenu->Append(ID_NEW, wxT("&New file..."));
 	fileMenu->Append(ID_LOAD, wxT("&Open file..."));
 	fileMenu->Append(ID_SAVE, wxT("&Save file..."));
 	fileMenu->Append(ID_ABOUT, wxT("&About..."));
@@ -39,8 +38,9 @@ MyFrame::MyFrame(const wxString& title, const wxPoint& pos, const wxSize& size)
 
 	wxMenuBar *menuBar = new wxMenuBar();
 	menuBar->Append(fileMenu, wxT("&File"));
-	
 
+
+    Bind(wxEVT_MENU, &MyFrame::OnNewFile, this, ID_NEW);
 	Bind(wxEVT_MENU, &MyFrame::OnOpenFile, this, ID_LOAD);
 	Bind(wxEVT_MENU, &MyFrame::OnSaveFile, this, ID_SAVE);
 	Bind(wxEVT_MENU, &MyFrame::OnQuit, this, ID_QUIT);
@@ -110,4 +110,10 @@ void MyFrame::OnSize(wxSizeEvent &event)
 	GetSize(&w,&h) ;
 	m_controlPanel->SetSize(wxRect(wxPoint(0,0), wxPoint(WIDGET_PANEL_WIDTH, h))) ;
 	m_drawingPanel->SetSize(wxRect(wxPoint(WIDGET_PANEL_WIDTH,0), wxPoint(w, h))) ;
+}
+
+void MyFrame::OnNewFile(wxCommandEvent& event)
+{
+    delete m_drawingPanel;
+    m_drawingPanel = new MyDrawingPanel(this);
 }

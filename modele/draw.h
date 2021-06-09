@@ -16,6 +16,9 @@ public:
     void AddCercle(Cercle cercle);
     ~Draw();
 
+    std::vector<Rectangle> GetRect();
+    std::vector<Cercle> GetCercle();
+
 private:
 std::vector<Rectangle> tabRect;
 std::vector<Cercle> tabCercle;
