@@ -11,6 +11,10 @@
 #include <wx/image.h>
 #include <wx/file.h>
 #include <wx/bitmap.h>
+#ifndef __RECANGLE_H__
+#include "../modele/rectangle.h"
+#endif
+#include "../modele/cercle.h"
 
 //------------------------------------------------------------------------
 class MyDrawingPanel: public wxPanel
@@ -25,6 +29,8 @@ private:
 	void OnMouseMove(wxMouseEvent &event) ;
 	void OnMouseLeftDown(wxMouseEvent &event) ;
 	void OnPaint(wxPaintEvent &event) ;
+	void OnDrawRect(Rectangle rect);
+	void OnDrawCercle(Cercle cercle);
 	wxPoint m_mousePoint ;
 	wxPoint m_onePoint ;
 };

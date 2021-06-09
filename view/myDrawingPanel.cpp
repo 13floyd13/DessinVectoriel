@@ -101,3 +101,13 @@ void MyDrawingPanel::SaveFile(wxString fileName)
 		fclose(f) ;
 	}
 }
+void MyDrawingPanel::OnDrawRect(Rectangle rectangle){
+    wxPaintDC dc(this);
+    Point point=rectangle.GetCorner();
+    dc.DrawRectangle(point.GetX(),point.GetY(),rectangle.GetWidth(),rectangle.GetHeight());
+}
+void MyDrawingPanel::OnDrawCercle(Cercle cercle){
+    wxPaintDC dc(this);
+    wxPoint p= (const wxPoint &) cercle.GetCentre();
+    dc.DrawCircle(p,cercle.GetRadius());
+}
