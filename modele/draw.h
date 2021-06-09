@@ -5,13 +5,16 @@
 #define __DRAW_H__
 
 
+#include <vector>
+#include "rectangle.h"
+#include "cercle.h"
 
 class Draw {
 public:
-    draw();
+    Draw();
     void AddRect(Rectangle rectangle);
     void AddCercle(Cercle cercle);
-    ~draw();
+    ~Draw();
 
 private:
 std::vector<Rectangle> tabRect;

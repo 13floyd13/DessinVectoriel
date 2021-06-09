@@ -14,7 +14,7 @@ Rectangle::Rectangle(int x, int y, int w, int h, const std::string& label) :
     m_corner.SetY(y);
     m_w = w;
     m_h = h;
-    m_rectCount++;
+
 }
 
 //-------------------------------------------
@@ -58,14 +58,14 @@ const Point& Rectangle::GetCorner() const
 }
 
 //-------------------------------------------
-int Rectangle::GetWidth() const
+int Rectangle::GetWidth()
 //-------------------------------------------
 {
     return m_w;
 }
 
 //-------------------------------------------
-int Rectangle::GetHeight() const
+int Rectangle::GetHeight()
 //-------------------------------------------
 {
     return m_h;
@@ -79,7 +79,7 @@ int Rectangle::GetHeight() const
 }*/
 
 //-------------------------------------------
-void Rectangle::Move(int dX, int dY)
+/*void Rectangle::Move(int dX, int dY)
 //-------------------------------------------
 {
 
@@ -87,11 +87,7 @@ void Rectangle::Move(int dX, int dY)
 }
 
 //-------------------------------------------
-int Rectangle::GetRectCount()
-//-------------------------------------------
-{
-    return Rectangle::m_rectCount;
-}
+
 
 //-------------------------------------------
 bool Rectangle::IsInside(const Rectangle &r) const
@@ -123,4 +119,4 @@ float Rectangle::Surface() const
 float Rectangle::Perimeter() const
 {
     return (float)(2*m_w + 2*m_h);;
-}
+}*/

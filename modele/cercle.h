@@ -3,7 +3,7 @@
 
 #include "forme.h"
 #include "point.h"
-#include "../view/myDrawingPanel.h"
+
 
 
 
@@ -25,8 +25,8 @@ public:
     const Point& GetCentre();
     const int GetRadius();
 
-    virtual float Surface() const override;
-    virtual float Perimeter() const override;
+  /*  virtual float Surface() const override;
+    virtual float Perimeter() const override;*/
   //  virtual void Display(MyDrawingPanel drawingPanel) const override;
 
 private:    // Could be protected

@@ -4,9 +4,7 @@
 #include "forme.h"
 #include "point.h"
 
-#ifndef __MYDRAWINGPANEL__
-#include "../view/myDrawingPanel.h"
-#endif
+
 
 
 class Rectangle: public Forme{
@@ -17,17 +15,17 @@ public:
 
     void SetCorner(const Point& p);
     void SetWidth(int w);
-    void SetHeight() const;
+    void SetHeight(int h);
 
     const Point& GetCorner() const;         // On retourne une r�f�rence const sur m_corner
-    int GetWidth() const;
-    int GetHeight() const;
+    int GetWidth() ;
+    int GetHeight() ;
 
-    void Move(int dX, int dY);                  // d�place le rectangle
+   /* void Move(int dX, int dY);                  // d�place le rectangle
     bool IsInside(const Rectangle &r) const;    // v�rifie l'inclusion
    // virtual void Display(MyDrawingPanel drawingPanel) const override;
     virtual float Surface() const override;
-    virtual float Perimeter() const override;
+    virtual float Perimeter() const override;*/
 
 private:
     Point m_corner;

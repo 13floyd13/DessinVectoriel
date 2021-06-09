@@ -2,7 +2,7 @@
 #define __FORME_H__
 
 #include <string>
-#include "../view/myDrawingPanel.h"
+
 
 
 class Forme
@@ -27,8 +27,8 @@ public:
 
     }*/
 
-    virtual float Surface() const { return 0.0f; }
-    virtual float Perimeter() const { return 0.0f; }
+    /*virtual float Surface() const { return 0.0f; }
+    virtual float Perimeter() const { return 0.0f; }*/
 
 protected:
     std::string * m_label;
