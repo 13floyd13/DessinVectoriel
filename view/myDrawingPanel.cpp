@@ -59,7 +59,10 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 	int radius = frame->GetControlPanel()->GetSliderValue() ;
 	bool check = frame->GetControlPanel()->GetCheckBoxValue() ;
     wxColour m_colour = frame->GetControlPanel()->GetColour();
-
+									// Pour stocker la couleur sous forme de string: wxString colorWxString=frame->GetControlPanel()->GetColour().GetAsString(wxC2S_HTML_SYNTAX);
+									// on cast en une string std::string colorStr= colorstr.ToStdString()
+									//Pour récup la couleur on la cast de nouveau wxColour m_colour= static_cast<const wxString &>(colorStr);
+									//dc.SetPen(wxPen(m_colour));
 	// then paint
 	wxPaintDC dc(this);
 
