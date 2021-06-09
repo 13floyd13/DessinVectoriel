@@ -28,10 +28,13 @@ private:
 	void OnSlider(wxScrollEvent &event) ;
 	void OnCheckBox(wxCommandEvent &event) ;
     void OnColorChange(wxColourPickerEvent &event);
+    void OnShapeChoose(wxCommandEvent &event);
 	wxButton* m_button ;
 	wxSlider* m_slider ;
 	wxCheckBox* m_checkBox ;
     wxColourPickerCtrl* m_colourPicker;
+    wxComboBox* m_comboBox;
+    wxArrayString m_shapes;
 };
 
 #endif
