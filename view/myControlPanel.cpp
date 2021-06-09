@@ -18,7 +18,8 @@ enum
 	ID_BUTTON1,
 	ID_SLIDER1,
 	ID_CHECKBOX1,
-	ID_COLORPICKER1
+	ID_COLORPICKER1,
+	ID_COMBOBOX1
 };
 
 //------------------------------------------------------------------------
@@ -48,9 +49,16 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 
 	// ajout du colorpicker
 	y+= WIDGET_Y_STEP ;
-	wxColour green(117, 0, 0);
-	m_colourPicker = new wxColourPickerCtrl(this, ID_COLORPICKER1, green, wxPoint(10, y), wxSize(100,20));
+	m_colourPicker = new wxColourPickerCtrl(this, ID_COLORPICKER1, wxColour(0,0,0), wxPoint(10, y), wxSize(100,20));
 	Bind(wxEVT_COLOURPICKER_CHANGED, &MyControlPanel::OnColorChange, this, ID_COLORPICKER1);
+
+	// ajout du choix de la forme
+	m_shapes.Add("Rectangle");
+	m_shapes.Add("Cercle");
+	m_shapes.Add("Triangle");
+	y+= WIDGET_Y_STEP;
+	m_comboBox = new wxComboBox(this, ID_COMBOBOX1, wxT("Rectangle"), wxPoint(10, y), wxDefaultSize, m_shapes, wxCB_READONLY);
+	Bind(wxEVT_COMBOBOX, &MyControlPanel::OnShapeChoose, this, ID_COMBOBOX1);
 }
 
 //------------------------------------------------------------------------
@@ -81,6 +89,11 @@ void MyControlPanel::OnCheckBox(wxCommandEvent &event)
 
 void MyControlPanel::OnColorChange(wxColourPickerEvent &event)
 {
+    MyFrame* frame = (MyFrame*)GetParent() ;
+    frame->RefreshDrawing() ;
+}
+
+void MyControlPanel::OnShapeChoose(wxCommandEvent &event) {
     MyFrame* frame = (MyFrame*)GetParent() ;
     frame->RefreshDrawing() ;
 }
