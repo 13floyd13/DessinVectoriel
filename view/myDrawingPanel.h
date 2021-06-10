@@ -15,6 +15,8 @@
 #include "../modele/rectangle.h"
 #endif
 #include "../modele/cercle.h"
+#include "../modele/draw.h"
+#include "../modele/point.h"
 
 //------------------------------------------------------------------------
 class MyDrawingPanel: public wxPanel
@@ -28,11 +30,14 @@ public:
 private:
 	void OnMouseMove(wxMouseEvent &event) ;
 	void OnMouseLeftDown(wxMouseEvent &event) ;
+    void OnMouseLeftUp(wxMouseEvent &event);
 	void OnPaint(wxPaintEvent &event) ;
 	void OnDrawRect(Rectangle rect);
 	void OnDrawCercle(Cercle cercle);
+    void OnDrawVector();
 	wxPoint m_mousePoint ;
 	wxPoint m_onePoint ;
+	Draw m_draw;
 };
 
 #endif

@@ -9,9 +9,18 @@ Draw::Draw(){
     std::vector<Cercle> tabCercle;
 }
 
+Draw::~Draw() {}
+
 void Draw::AddRect(Rectangle rectangle) {
     tabRect.push_back(rectangle);
 }
 void Draw::AddCercle(Cercle cercle) {
     tabCercle.push_back(cercle);
+}
+std::vector<Rectangle> Draw::GetRect() {
+    return tabRect;
+};
+
+std::vector<Cercle> Draw::GetCercle() {
+    return tabCercle;
 }
