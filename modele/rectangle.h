@@ -9,8 +9,8 @@
 
 class Rectangle: public Forme{
 public:
-    Rectangle(int x, int y, int w,int h, const std::string& label);
-    Rectangle(const Point& p, int w, int h, const std::string& label);
+    Rectangle(int x, int y, int w,int h, const std::string& label, const std::string& color, const std::string& fillColor);
+    Rectangle(const Point& p, int w, int h, const std::string& label, const std::string& color, const std::string& fillColor);
     ~Rectangle();
 
     void SetCorner(const Point& p);
@@ -23,9 +23,9 @@ public:
 
    /* void Move(int dX, int dY);                  // d�place le rectangle
     bool IsInside(const Rectangle &r) const;    // v�rifie l'inclusion
-   // virtual void Display(MyDrawingPanel drawingPanel) const override;
+   // virtual void Display(MyDrawingPanel drawingPanel) const override;*/
     virtual float Surface() const override;
-    virtual float Perimeter() const override;*/
+    virtual float Perimeter() const override;
 
 private:
     Point m_corner;

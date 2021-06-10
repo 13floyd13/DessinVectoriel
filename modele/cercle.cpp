@@ -7,8 +7,8 @@
 
 
 
-Cercle::Cercle(Point centre, int radius, std::string label) :
-        Forme(label),
+Cercle::Cercle(Point centre, int radius, std::string label, std::string color, std::string fillColor) :
+        Forme(label,color,fillColor),
         m_center(centre),
         m_radius(radius){}
 
@@ -18,7 +18,7 @@ Cercle::Cercle(Point centre, int radius, std::string label) :
 }*/
 
 // constructeur de copie
-Cercle::Cercle(const Cercle &other) : Forme(*other.m_label), m_center(other.m_center), m_radius(other.m_radius)
+Cercle::Cercle(const Cercle &other) : Forme(*other.m_label,*other.m_color,*other.m_fillColor), m_center(other.m_center), m_radius(other.m_radius)
 {}
 
 Cercle::~Cercle()
@@ -29,13 +29,15 @@ Cercle &Cercle::operator=(const Cercle &other)
     if (this == &other) return *this;
 
     *m_label = *other.m_label;
+    *m_color = *other.m_color;
+    *m_fillColor=*other.m_fillColor;
     m_center = other.m_center;
     m_radius = other.m_radius;
     return *this;
 }
 
 
-/*float Cercle::Surface() const
+float Cercle::Surface() const
 {
     return m_radius * m_radius * (float)M_PI;
 }

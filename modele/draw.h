@@ -6,6 +6,7 @@
 
 
 #include <vector>
+#include <map>
 #include "rectangle.h"
 #include "cercle.h"
 
@@ -16,9 +17,10 @@ public:
     void AddCercle(Cercle cercle);
     void AddForme(Forme forme);
     ~Draw();
-    std::vector<Forme>GetForm();
+
     std::vector<Rectangle> GetRect();
     std::vector<Cercle> GetCercle();
+    std::vector<Forme> GetForm();
 
 private:
 std::vector<Rectangle> tabRect;
