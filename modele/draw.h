@@ -15,17 +15,17 @@ public:
     Draw();
     void AddRect(Rectangle rectangle);
     void AddCercle(Cercle cercle);
-    void AddForme(Forme forme);
+    void AddForme(Forme* forme);
     ~Draw();
 
     std::vector<Rectangle> GetRect();
     std::vector<Cercle> GetCercle();
-    std::vector<Forme> GetForm();
+    std::vector<Forme*> GetForm();
 
 private:
 std::vector<Rectangle> tabRect;
 std::vector<Cercle> tabCercle;
-std::vector<Forme> tabForm;
+std::vector<Forme*> tabForm;
 };
 
 

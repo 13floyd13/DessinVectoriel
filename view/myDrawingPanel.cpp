@@ -89,10 +89,10 @@ void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
 
     wxString shape = frame->GetControlPanel()->GetComboBoxValue();
     if (shape == "Rectangle") {
-        m_draw.AddRect(Rectangle(m_onePoint.x, m_onePoint.y, m_mousePoint.x-m_onePoint.x, m_mousePoint.y-m_onePoint.y,"rectangle", colorStr,fillColorStr));
+        m_draw.AddForme(new Rectangle(m_onePoint.x, m_onePoint.y, m_mousePoint.x-m_onePoint.x, m_mousePoint.y-m_onePoint.y,"rectangle", colorStr,fillColorStr));
     } else if (shape == "Cercle") {
         int radius = (int)sqrt((m_mousePoint.x-m_onePoint.x)*(m_mousePoint.x-m_onePoint.x)+(m_mousePoint.y-m_onePoint.y)*(m_mousePoint.y-m_onePoint.y));
-        m_draw.AddCercle(Cercle(Point(m_onePoint.x, m_onePoint.y), radius,"cercle" , colorStr, fillColorStr));
+        m_draw.AddForme(new Cercle(Point(m_onePoint.x, m_onePoint.y), radius,"cercle" , colorStr, fillColorStr));
     }
 
     Refresh() ; // send an event that calls the OnPaint method
@@ -195,13 +195,24 @@ void MyDrawingPanel::OnDrawCercle(Cercle cercle){
 
 void MyDrawingPanel::OnDrawVector()
 {
-    std::vector<Rectangle> tabRect = m_draw.GetRect();
-    for (auto it = tabRect.begin(); it != tabRect.end(); it++) {
-        OnDrawRect(*it);
-    }
+//    std::vector<Rectangle> tabRect = m_draw.GetRect();
+//    for (auto it = tabRect.begin(); it != tabRect.end(); it++) {
+//        OnDrawRect(*it);
+//    }
+//
+//    std::vector<Cercle> tabCercle = m_draw.GetCercle();
+//    for (auto it = tabCercle.begin(); it != tabCercle.end(); it++) {
+//        OnDrawCercle(*it);
+//    }
 
-    std::vector<Cercle> tabCercle = m_draw.GetCercle();
-    for (auto it = tabCercle.begin(); it != tabCercle.end(); it++) {
-        OnDrawCercle(*it);
+    std::vector<Forme*> tabForme = m_draw.GetForm();
+    for (auto it = tabForme.begin(); it != tabForme.end(); it++) {
+        if ((*it)->GetLabel() == "rectangle") {
+            Rectangle *r = dynamic_cast<Rectangle*>(*it);
+            OnDrawRect(*r);
+        } else if ((*it)->GetLabel() == "cercle") {
+            Cercle *c = dynamic_cast<Cercle *>(*it);
+            OnDrawCercle(*c);
+        }
     }
 }
