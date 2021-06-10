@@ -19,7 +19,8 @@ enum
 	ID_SLIDER1,
 	ID_CHECKBOX1,
 	ID_COLORPICKER1,
-	ID_COMBOBOX1
+	ID_COMBOBOX1,
+	ID_COLORPICKER2
 };
 
 //------------------------------------------------------------------------
@@ -37,20 +38,26 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	Bind(wxEVT_BUTTON, &MyControlPanel::OnButton, this, ID_BUTTON1) ;
 
 	y+= WIDGET_Y_STEP ;
-	wxStaticText* text1 = new wxStaticText(this, wxID_ANY, wxT("Radius"), wxPoint(10, y)) ;
-
-	y+= 15 ;
-	m_slider = new wxSlider(this, ID_SLIDER1, 10, 2, 100, wxPoint(10, y), wxSize(100,20)) ;
-	Bind(wxEVT_SCROLL_THUMBTRACK, &MyControlPanel::OnSlider, this, ID_SLIDER1) ;
-
-	y+= WIDGET_Y_STEP ;
 	m_checkBox = new wxCheckBox(this, ID_CHECKBOX1, "Show (x,y)", wxPoint(10, y), wxSize(100,20)) ;
 	Bind(wxEVT_CHECKBOX, &MyControlPanel::OnCheckBox, this, ID_CHECKBOX1) ;
 
-	// ajout du colorpicker
+    y+= WIDGET_Y_STEP ;
+    wxStaticText* text1 = new wxStaticText(this, wxID_ANY, wxT("Epaisseur"), wxPoint(10, y)) ;
+
+    y+= 15 ;
+    m_slider = new wxSlider(this, ID_SLIDER1, 1, 1, 50, wxPoint(10, y), wxSize(100,20)) ;
+    Bind(wxEVT_SCROLL_THUMBTRACK, &MyControlPanel::OnSlider, this, ID_SLIDER1) ;
+
+	// ajout des colorpickers
 	y+= WIDGET_Y_STEP ;
-	m_colourPicker = new wxColourPickerCtrl(this, ID_COLORPICKER1, wxColour(0,0,0), wxPoint(10, y), wxSize(100,20));
-	Bind(wxEVT_COLOURPICKER_CHANGED, &MyControlPanel::OnColorChange, this, ID_COLORPICKER1);
+    wxStaticText* text2 = new wxStaticText(this, wxID_ANY, wxT("Pen"), wxPoint(10, y)) ;
+	m_penColourPicker = new wxColourPickerCtrl(this, ID_COLORPICKER1, wxColour(0,0,0), wxPoint(60, y-3), wxSize(80,30));
+	Bind(wxEVT_COLOURPICKER_CHANGED, &MyControlPanel::OnPenColorChange, this, ID_COLORPICKER1);
+
+    y+= WIDGET_Y_STEP ;
+    wxStaticText* text3 = new wxStaticText(this, wxID_ANY, wxT("Brush"), wxPoint(10, y)) ;
+    m_brushColourPicker = new wxColourPickerCtrl(this, ID_COLORPICKER1, wxColour(255,255,255), wxPoint(60, y-3), wxSize(80,30));
+    Bind(wxEVT_COLOURPICKER_CHANGED, &MyControlPanel::OnBrushColorChange, this, ID_COLORPICKER2);
 
 	// ajout du choix de la forme
 	m_shapes.Add("Rectangle");
@@ -87,7 +94,13 @@ void MyControlPanel::OnCheckBox(wxCommandEvent &event)
 	frame->RefreshDrawing() ;	// update the drawing panel
 }
 
-void MyControlPanel::OnColorChange(wxColourPickerEvent &event)
+void MyControlPanel::OnPenColorChange(wxColourPickerEvent &event)
+{
+    MyFrame* frame = (MyFrame*)GetParent() ;
+    frame->RefreshDrawing() ;
+}
+
+void MyControlPanel::OnBrushColorChange(wxColourPickerEvent &event)
 {
     MyFrame* frame = (MyFrame*)GetParent() ;
     frame->RefreshDrawing() ;

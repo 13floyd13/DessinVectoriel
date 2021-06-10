@@ -18,6 +18,8 @@
 #include "../modele/draw.h"
 #include "../modele/point.h"
 
+#include <cmath>
+
 //------------------------------------------------------------------------
 class MyDrawingPanel: public wxPanel
 //------------------------------------------------------------------------
@@ -38,6 +40,7 @@ private:
 	wxPoint m_mousePoint ;
 	wxPoint m_onePoint ;
 	Draw m_draw;
+	bool m_pressed;
 };
 
 #endif

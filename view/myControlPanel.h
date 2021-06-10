@@ -25,19 +25,22 @@ public:
 	MyControlPanel( wxWindow *parent ) ;
 	int GetSliderValue() {return m_slider->GetValue() ;} ;
 	bool GetCheckBoxValue() {return m_checkBox->GetValue() ;} ;
-    wxColour GetColour() {return m_colourPicker->GetColour();};
+    wxColour GetPenColour() {return m_penColourPicker->GetColour();};
+    wxColour GetBrushColour() {return m_brushColourPicker->GetColour();};
     wxString GetComboBoxValue() {return m_comboBox->GetValue();}
 
 private:
 	void OnButton(wxCommandEvent &event) ;
 	void OnSlider(wxScrollEvent &event) ;
 	void OnCheckBox(wxCommandEvent &event) ;
-    void OnColorChange(wxColourPickerEvent &event);
+    void OnPenColorChange(wxColourPickerEvent &event);
+    void OnBrushColorChange(wxColourPickerEvent &event);
     void OnShapeChoose(wxCommandEvent &event);
 	wxButton* m_button ;
 	wxSlider* m_slider ;
 	wxCheckBox* m_checkBox ;
-    wxColourPickerCtrl* m_colourPicker;
+    wxColourPickerCtrl* m_penColourPicker;
+    wxColourPickerCtrl* m_brushColourPicker;
     wxComboBox* m_comboBox;
     wxArrayString m_shapes;
 };
