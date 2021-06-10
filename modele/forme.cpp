@@ -19,7 +19,7 @@ Forme::Forme(const std::string& label, const std::string& color, const std::stri
 Forme::Forme(const Forme& other)
 {
     m_color = new string(*(other.m_color));
-    m_fillColor= new string(*(other.m_color));
+    m_fillColor= new string(*(other.m_fillColor));
     m_label = new string(*(other.m_label));
 }
 
