@@ -1,10 +1,10 @@
 #include <cmath>
 #include "rectangle.h"
 
-Rectangle::Rectangle(int x, int y, int w, int h, const std::string& label) :
+Rectangle::Rectangle(int x, int y, int w, int h, const std::string& label, const std::string& color, const std::string& fillColor) :
 // Appel du constructeur de Forme avec un label
 
-        Forme(label)
+        Forme(label,color,fillColor)
 //-------------------------------------------
 // attention, cette version appelle le constructeur par d�faut de Point
 // comme le compilateur ne l?a pas cr��, il faut le rajouter dans Point
@@ -18,8 +18,8 @@ Rectangle::Rectangle(int x, int y, int w, int h, const std::string& label) :
 }
 
 //-------------------------------------------
-Rectangle::Rectangle(const Point& p, int w, int h, const std::string& label) :
-        Forme(label),
+Rectangle::Rectangle(const Point& p, int w, int h, const std::string& label, const std::string& color, const std::string& fillColor) :
+        Forme(label,color,fillColor),
         m_corner(p.GetX(),p.GetY()),
         m_w(w),
         m_h(h){}
@@ -108,7 +108,7 @@ bool Rectangle::IsInside(const Rectangle &r) const
     // On v�rifier que r est inclus dans ce Rectangle (this)
     return ((x1r1 > x1r2 && x1r1 < x2r2) || (x1r1 < x1r2 && x1r1 > x2r2)) &&
            ((x1r1 > x1r2 && x1r1 < x2r2) || (x1r1 < x1r2 && x1r1 > x2r2));
-}
+}*/
 
 
 float Rectangle::Surface() const
@@ -119,4 +119,4 @@ float Rectangle::Surface() const
 float Rectangle::Perimeter() const
 {
     return (float)(2*m_w + 2*m_h);;
-}*/
+}

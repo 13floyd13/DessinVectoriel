@@ -79,8 +79,9 @@ void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
     std::string colorStr= colorWxString.ToStdString();
     wxString shape = frame->GetControlPanel()->GetComboBoxValue();
     if (shape == "Rectangle") {
-        m_draw.AddRect(Rectangle(m_onePoint.x, m_onePoint.y, m_mousePoint.x-m_onePoint.x, m_mousePoint.y-m_onePoint.y, colorStr));
+        m_draw.AddRect(Rectangle(m_onePoint.x, m_onePoint.y, m_mousePoint.x-m_onePoint.x, m_mousePoint.y-m_onePoint.y,"rectangle", colorStr,colorStr));
     } else if (shape == "Cercle") {
+
         int radius = (int)sqrt((m_mousePoint.x-m_onePoint.x)*(m_mousePoint.x-m_onePoint.x)+(m_mousePoint.y-m_onePoint.y)*(m_mousePoint.y-m_onePoint.y));
         m_draw.AddCercle(Cercle(Point(m_onePoint.x, m_onePoint.y), radius, colorStr));
     }
