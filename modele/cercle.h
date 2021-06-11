@@ -20,6 +20,7 @@ public:
 
     virtual ~Cercle();
 
+    void SetCenter(Point p);
 
     const Point & GetCentre() const;
     const int GetRadius() const;
