@@ -171,6 +171,9 @@ void MyDrawingPanel::OnDrawRect(Rectangle rectangle){
     // recup la valeur de l'épaisseur
     MyFrame* frame =  (MyFrame*)GetParent() ;
 
+    std::cout << rectangle.GetCorner().GetX() << "," << rectangle.GetCorner().GetY() << std::endl;
+    std::cout << rectangle.GetCorner().GetX()+rectangle.GetWidth() << "," << rectangle.GetCorner().GetY()+rectangle.GetHeight() << std::endl;
+
     wxColour penColor = static_cast<const wxString &>(rectangle.GetColor());
     dc.SetPen(wxPen(penColor,rectangle.GetThickness()));
 

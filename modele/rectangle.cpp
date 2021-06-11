@@ -58,14 +58,14 @@ const Point& Rectangle::GetCorner() const
 }
 
 //-------------------------------------------
-int Rectangle::GetWidth()
+int Rectangle::GetWidth() const
 //-------------------------------------------
 {
     return m_w;
 }
 
 //-------------------------------------------
-int Rectangle::GetHeight()
+int Rectangle::GetHeight() const
 //-------------------------------------------
 {
     return m_h;

@@ -18,8 +18,8 @@ public:
     void SetHeight(int h);
 
     const Point& GetCorner() const;         // On retourne une r�f�rence const sur m_corner
-    int GetWidth() ;
-    int GetHeight() ;
+    int GetWidth() const;
+    int GetHeight() const;
 
    /* void Move(int dX, int dY);                  // d�place le rectangle*/
     bool IsInside(int x, int y) const;    // v�rifie l'inclusion

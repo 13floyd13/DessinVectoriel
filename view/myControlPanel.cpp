@@ -42,7 +42,7 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	Bind(wxEVT_CHECKBOX, &MyControlPanel::OnCheckBox, this, ID_CHECKBOX1) ;
 
     y+= WIDGET_Y_STEP ;
-    wxStaticText* text1 = new wxStaticText(this, wxID_ANY, wxT("Epaisseur"), wxPoint(10, y)) ;
+    wxStaticText* text1 = new wxStaticText(this, wxID_ANY, wxT("Epaisseur : "), wxPoint(10, y)) ;
 
     y+= 15 ;
     m_slider = new wxSlider(this, ID_SLIDER1, 1, 1, 50, wxPoint(10, y), wxSize(100,20)) ;
