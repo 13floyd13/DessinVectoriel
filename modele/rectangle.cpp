@@ -110,6 +110,37 @@ bool Rectangle::IsInside(const Rectangle &r) const
            ((x1r1 > x1r2 && x1r1 < x2r2) || (x1r1 < x1r2 && x1r1 > x2r2));
 }*/
 
+bool Rectangle::IsInside(int x,int y) const {
+   int rectX= this->GetCorner().GetX();
+   int rectY= this->GetCorner().GetY();
+   int rectXoppose= rectX+ this->GetWidth();
+   int rectYoppose= rectY+ this->GetHeight();
+   int xMin=0;
+   int xMax=0;
+   int yMin=0;
+   int yMax=0;
+
+   if(rectX > rectXoppose){
+       xMin=rectXoppose;
+       xMax=rectX;
+   }else{
+       xMin=rectX;
+       xMax=rectXoppose;
+   }
+
+   if(rectY > rectYoppose){
+       yMin=rectYoppose;
+       yMax=rectY;
+   }else{
+       yMin=rectY;
+       yMax=rectYoppose;
+   }
+
+   if(x<xMin || x>xMax || y<yMin || y>yMax){
+       return false;
+   }else{
+       return true;
+   }
 
 float Rectangle::Surface() const
 {
