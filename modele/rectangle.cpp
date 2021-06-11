@@ -111,43 +111,40 @@ bool Rectangle::IsInside(const Rectangle &r) const
 }*/
 
 bool Rectangle::IsInside(int x,int y) const {
-   int rectX= this->GetCorner().GetX();
-   int rectY= this->GetCorner().GetY();
-   int rectXoppose= rectX+ this->GetWidth();
-   int rectYoppose= rectY+ this->GetHeight();
-   int xMin=0;
-   int xMax=0;
-   int yMin=0;
-   int yMax=0;
+    int rectX = this->GetCorner().GetX();
+    int rectY = this->GetCorner().GetY();
+    int rectXoppose = rectX + this->GetWidth();
+    int rectYoppose = rectY + this->GetHeight();
+    int xMin = 0;
+    int xMax = 0;
+    int yMin = 0;
+    int yMax = 0;
 
-   if(rectX > rectXoppose){
-       xMin=rectXoppose;
-       xMax=rectX;
-   }else{
-       xMin=rectX;
-       xMax=rectXoppose;
-   }
+    if (rectX > rectXoppose) {
+        xMin = rectXoppose;
+        xMax = rectX;
+    } else {
+        xMin = rectX;
+        xMax = rectXoppose;
+    }
 
-   if(rectY > rectYoppose){
-       yMin=rectYoppose;
-       yMax=rectY;
-   }else{
-       yMin=rectY;
-       yMax=rectYoppose;
-   }
+    if (rectY > rectYoppose) {
+        yMin = rectYoppose;
+        yMax = rectY;
+    } else {
+        yMin = rectY;
+        yMax = rectYoppose;
+    }
 
-   if(x<xMin || x>xMax || y<yMin || y>yMax){
-       return false;
-   }else{
-       return true;
-   }
-
-float Rectangle::Surface() const
-{
-    return (float)(m_w * m_h);
+    return !(x < xMin || x > xMax || y < yMin || y > yMax);
 }
 
-float Rectangle::Perimeter() const
-{
-    return (float)(2*m_w + 2*m_h);;
-}
+//float Rectangle::Surface() const
+//{
+//    return (float)(m_w * m_h);
+//}
+//
+//float Rectangle::Perimeter() const
+//{
+//    return (float)(2*m_w + 2*m_h);
+//}

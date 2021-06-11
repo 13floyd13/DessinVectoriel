@@ -62,6 +62,7 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	// ajout du choix de la forme
 	m_shapes.Add("Rectangle");
 	m_shapes.Add("Cercle");
+	m_shapes.Add("Selection");
 //	m_shapes.Add("Triangle");
 	y+= WIDGET_Y_STEP;
 	m_comboBox = new wxComboBox(this, ID_COMBOBOX1, wxT("Rectangle"), wxPoint(10, y), wxDefaultSize, m_shapes, wxCB_READONLY);
