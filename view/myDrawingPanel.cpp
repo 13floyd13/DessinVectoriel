@@ -245,7 +245,7 @@ void MyDrawingPanel::FormeSelection()
         if ((*it)->GetLabel() == "rectangle") {
             Rectangle *r = dynamic_cast<Rectangle*>(*it);
             if (r->IsInside(m_onePoint.x, m_onePoint.y)) {
-                std::cout << "dedant" << std::endl;
+                std::cout << "dedans" << std::endl;
                 r->SetWidth(r->GetWidth()+20);
                 notSelected = false;
             } else {
