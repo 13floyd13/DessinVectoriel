@@ -22,6 +22,8 @@ public:
 
     Cercle &operator=(const Cercle &other);
 
+    void SetCenter(Point p);
+
     const Point & GetCentre() const;
     const int GetRadius() const;
     bool IsInside(int x, int y) const;
