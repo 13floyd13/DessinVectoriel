@@ -10,7 +10,7 @@ class Forme
 public:
     // Construction/Destruction
     Forme();
-    Forme(const std::string& label, const std::string& color,const std::string& fillColor, int thickness);    // Avec une string
+    Forme(const std::string& label, int color,int fillColor, int thickness);    // Avec une string
     Forme(const Forme& other);          // Construction par recopie
     virtual ~Forme();
 
@@ -19,12 +19,12 @@ public:
 
 
     void SetLabel(const std::string& s);
-    void SetColor(const std::string& s);
-    void SetFillColor(const std::string& s);
+    void SetColor(int color);
+    void SetFillColor(int fillColor);
     void SetThickness(int thickness);
     std::string GetLabel() const;
-    std::string GetColor() const;
-    std::string GetFillColor() const;
+    int GetColor() const;
+    int GetFillColor() const;
     int GetThickness() const;
 
 
@@ -38,8 +38,8 @@ public:
 
 protected:
     std::string * m_label;
-    std::string * m_color;
-    std::string * m_fillColor;
+    int m_color;
+    int m_fillColor;
     int m_thickness;
 };
 

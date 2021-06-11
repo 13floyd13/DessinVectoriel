@@ -14,7 +14,7 @@ public:
 
     //Cercle();
     Cercle(const Cercle &other);
-    Cercle(Point centre, int radius, std::string label, std::string color, std::string fillColor, int thickness);
+    Cercle(Point centre, int radius, std::string label, int color, int fillColor, int thickness);
 
 
     virtual ~Cercle();
@@ -22,9 +22,9 @@ public:
 
     Cercle &operator=(const Cercle &other);
 
-    const Point& GetCentre();
-    const int GetRadius();
-
+    const Point & GetCentre() const;
+    const int GetRadius() const;
+    bool IsInside(int x, int y) const;
     virtual float Surface() const override;
     virtual float Perimeter() const override;
   //  virtual void Display(MyDrawingPanel drawingPanel) const override;

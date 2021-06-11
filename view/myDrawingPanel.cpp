@@ -42,20 +42,22 @@ void MyDrawingPanel::OnMouseMove(wxMouseEvent &event)
 	if (m_pressed) {
         MyFrame* frame =  (MyFrame*)GetParent() ;
 
-        wxString colorWxString=frame->GetControlPanel()->GetPenColour().GetAsString(wxC2S_HTML_SYNTAX);
-        std::string colorStr= colorWxString.ToStdString();
 
-        wxString fillColorWxString=frame->GetControlPanel()->GetBrushColour().GetAsString(wxC2S_HTML_SYNTAX);
-        std::string fillColorStr= fillColorWxString.ToStdString();
+        //std::string colorStr= colorWxString.ToStdString();
+
+        //wxString fillColorWxString=frame->GetControlPanel()->GetBrushColour().GetAsString(wxC2S_HTML_SYNTAX);
+        //std::string fillColorStr= fillColorWxString.ToStdString();
+        int color=frame->GetControlPanel()->GetPenColour().GetRGB();
+        int fillColor=frame->GetControlPanel()->GetBrushColour().GetRGB();
 
         int thickness = frame->GetControlPanel()->GetSliderValue();
 
         wxString shape = frame->GetControlPanel()->GetComboBoxValue();
 	    if (shape == "Rectangle") {
-            OnDrawRect(Rectangle(m_onePoint.x, m_onePoint.y, m_mousePoint.x-m_onePoint.x, m_mousePoint.y-m_onePoint.y,"rectangle", colorStr,fillColorStr,thickness));
+            OnDrawRect(Rectangle(m_onePoint.x, m_onePoint.y, m_mousePoint.x-m_onePoint.x, m_mousePoint.y-m_onePoint.y,"rectangle", color,fillColor,thickness));
 	    } else if (shape == "Cercle") {
 	        int radius = (int)sqrt((m_mousePoint.x-m_onePoint.x)*(m_mousePoint.x-m_onePoint.x)+(m_mousePoint.y-m_onePoint.y)*(m_mousePoint.y-m_onePoint.y));
-            OnDrawCercle(Cercle(Point(m_onePoint.x, m_onePoint.y), radius,"cercle" , colorStr, fillColorStr,thickness));
+            OnDrawCercle(Cercle(Point(m_onePoint.x, m_onePoint.y), radius,"cercle" , color, fillColor,thickness));
 	    }
 	}
 }
@@ -88,20 +90,21 @@ void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
     m_pressed = false;
     MyFrame* frame =  (MyFrame*)GetParent() ;
 
-    wxString colorWxString=frame->GetControlPanel()->GetPenColour().GetAsString(wxC2S_HTML_SYNTAX);
+   /* wxString colorWxString=frame->GetControlPanel()->GetPenColour().GetAsString(wxC2S_HTML_SYNTAX);
     std::string colorStr= colorWxString.ToStdString();
 
     wxString fillColorWxString=frame->GetControlPanel()->GetBrushColour().GetAsString(wxC2S_HTML_SYNTAX);
-    std::string fillColorStr= fillColorWxString.ToStdString();
-
+    std::string fillColorStr= fillColorWxString.ToStdString();*/
+    int color=frame->GetControlPanel()->GetPenColour().GetRGB();
+    int fillColor=frame->GetControlPanel()->GetBrushColour().GetRGB();
     int thickness = frame->GetControlPanel()->GetSliderValue();
 
     wxString shape = frame->GetControlPanel()->GetComboBoxValue();
     if (shape == "Rectangle") {
-        m_draw.AddForme(new Rectangle(m_onePoint.x, m_onePoint.y, m_mousePoint.x-m_onePoint.x, m_mousePoint.y-m_onePoint.y,"rectangle", colorStr,fillColorStr,thickness));
+        m_draw.AddForme(new Rectangle(m_onePoint.x, m_onePoint.y, m_mousePoint.x-m_onePoint.x, m_mousePoint.y-m_onePoint.y,"rectangle", color,fillColor,thickness));
     } else if (shape == "Cercle") {
         int radius = (int)sqrt((m_mousePoint.x-m_onePoint.x)*(m_mousePoint.x-m_onePoint.x)+(m_mousePoint.y-m_onePoint.y)*(m_mousePoint.y-m_onePoint.y));
-        m_draw.AddForme(new Cercle(Point(m_onePoint.x, m_onePoint.y), radius,"cercle" , colorStr, fillColorStr,thickness));
+        m_draw.AddForme(new Cercle(Point(m_onePoint.x, m_onePoint.y), radius,"cercle" , color, fillColor,thickness));
     }
 
     Refresh() ; // send an event that calls the OnPaint method
@@ -179,10 +182,12 @@ void MyDrawingPanel::OnDrawRect(Rectangle rectangle){
 //    std::cout << rectangle.GetCorner().GetX() << "," << rectangle.GetCorner().GetY() << std::endl;
 //    std::cout << rectangle.GetCorner().GetX()+rectangle.GetWidth() << "," << rectangle.GetCorner().GetY()+rectangle.GetHeight() << std::endl;
 
-    wxColour penColor = static_cast<const wxString &>(rectangle.GetColor());
+    //wxColour penColor = static_cast<const wxString &>(rectangle.GetColor());
+    wxColour penColor= rectangle.GetColor();
     dc.SetPen(wxPen(penColor,rectangle.GetThickness()));
 
-    wxColour brushColor = static_cast<const wxString &>(rectangle.GetFillColor());
+   // wxColour brushColor = static_cast<const wxString &>(rectangle.GetFillColor());
+    wxColour brushColor= rectangle.GetFillColor();
     dc.SetBrush(wxBrush(brushColor));
 
     wxPoint p=  (const wxPoint &) rectangle.GetCorner();
@@ -194,10 +199,12 @@ void MyDrawingPanel::OnDrawCercle(Cercle cercle){
     // recup la valeur de l'épaisseur
     MyFrame* frame =  (MyFrame*)GetParent() ;
 
-    wxColour penColor = static_cast<const wxString &>(cercle.GetColor());
+    //wxColour penColor = static_cast<const wxString &>(cercle.GetColor());
+    wxColour penColor= cercle.GetColor();
     dc.SetPen(wxPen(penColor,cercle.GetThickness()));
 
-    wxColour brushColor = static_cast<const wxString &>(cercle.GetFillColor());
+    //wxColour brushColor = static_cast<const wxString &>(cercle.GetFillColor());
+    wxColour brushColor= cercle.GetFillColor();
     dc.SetBrush(wxBrush(brushColor));
 
     wxPoint p= (const wxPoint &) cercle.GetCentre();

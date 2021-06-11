@@ -1,7 +1,7 @@
 #include <cmath>
 #include "rectangle.h"
 
-Rectangle::Rectangle(int x, int y, int w, int h, const std::string& label, const std::string& color, const std::string& fillColor, int thickness) :
+Rectangle::Rectangle(int x, int y, int w, int h, const std::string& label, int color, int fillColor, int thickness) :
 // Appel du constructeur de Forme avec un label
 
         Forme(label,color,fillColor,thickness)
@@ -18,7 +18,7 @@ Rectangle::Rectangle(int x, int y, int w, int h, const std::string& label, const
 }
 
 //-------------------------------------------
-Rectangle::Rectangle(const Point& p, int w, int h, const std::string& label, const std::string& color, const std::string& fillColor, int thickness) :
+Rectangle::Rectangle(const Point& p, int w, int h, const std::string& label, int color, int fillColor, int thickness) :
         Forme(label,color,fillColor, thickness),
         m_corner(p.GetX(),p.GetY()),
         m_w(w),
