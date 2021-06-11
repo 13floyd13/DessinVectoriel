@@ -53,9 +53,20 @@ float Cercle::Perimeter() const
 {
     drawingPanel.OnDrawCercle(this);
 }*/
-const Point& Cercle::GetCentre(){
+bool Cercle::IsInside(int x, int y) const {
+    int xCentre= this->GetCentre().GetX();
+    int yCentre= this->GetCentre().GetY();
+
+    int distance= sqrt(x-xCentre)*(x-xCentre)+(y-yCentre)*(y-yCentre);
+    if(distance < this->GetRadius()){
+        return true;
+    } else{
+        return false;
+    }
+}
+const Point & Cercle::GetCentre() const {
     return m_center;
 }
-const int Cercle::GetRadius(){
+const int Cercle::GetRadius() const{
     return m_radius;
 }
