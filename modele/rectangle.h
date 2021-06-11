@@ -21,19 +21,13 @@ public:
     int GetWidth() const;
     int GetHeight() const;
 
-   /* void Move(int dX, int dY);                  // d�place le rectangle*/
+
     bool IsInside(int x, int y) const;    // v�rifie l'inclusion
-   // virtual void Display(MyDrawingPanel drawingPanel) const override;*/
-//    virtual float Surface() const;
-//    virtual float Perimeter() const;
 
 private:
     Point m_corner;
     int m_w;
     int m_h;
-  //  MyDrawingPanel drawingPanel;
-
-
 };
 
 

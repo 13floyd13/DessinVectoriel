@@ -99,6 +99,7 @@ void MyFrame::OnSaveFile(wxCommandEvent & WXUNUSED(event))
 	wxString filename = wxSaveFileSelector(wxT("Save file as"), wxT("*.txt"), wxT("data"));
 	if ( !filename.empty() )
 		m_drawingPanel->SaveFile(filename) ;
+        //m_drawingPanel->OnSave(filename);
 }
 
 //------------------------------------------------------------------------

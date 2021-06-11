@@ -72,43 +72,7 @@ int Rectangle::GetHeight() const
 }
 
 //-------------------------------------------
-/*void Rectangle::Display(MyDrawPanel drawPanel) const
-//-------------------------------------------
-{
-    drawingPanel.OnDrawRect(this);
-}*/
 
-//-------------------------------------------
-/*void Rectangle::Move(int dX, int dY)
-//-------------------------------------------
-{
-
-    m_corner.Move(dX, dY);
-}
-
-//-------------------------------------------
-
-
-//-------------------------------------------
-bool Rectangle::IsInside(const Rectangle &r) const
-//-------------------------------------------
-// retourne true si le rectangle est enti�rement � l'int�rieur (inclus) dans le Rectangle r
-// si r1 est inclus dans r2
-{
-    // On r�cup�re les valeurs des points du rectangle
-    int x1r1 = GetCorner().GetX();
-    int y1r1 = GetCorner().GetY();
-    int x2r1 = x1r1 + m_w;
-    int y2r1 = y1r1 + m_h;
-    int x1r2 = r.GetCorner().GetX();
-    int y1r2 = r.GetCorner().GetY();
-    int x2r2 = x1r2 + r.GetWidth();
-    int y2r2 = y1r2 + r.GetHeight();
-
-    // On v�rifier que r est inclus dans ce Rectangle (this)
-    return ((x1r1 > x1r2 && x1r1 < x2r2) || (x1r1 < x1r2 && x1r1 > x2r2)) &&
-           ((x1r1 > x1r2 && x1r1 < x2r2) || (x1r1 < x1r2 && x1r1 > x2r2));
-}*/
 
 bool Rectangle::IsInside(int x,int y) const {
     int rectX = this->GetCorner().GetX();
@@ -139,12 +103,4 @@ bool Rectangle::IsInside(int x,int y) const {
     return !(x < xMin || x > xMax || y < yMin || y > yMax);
 }
 
-//float Rectangle::Surface() const
-//{
-//    return (float)(m_w * m_h);
-//}
-//
-//float Rectangle::Perimeter() const
-//{
-//    return (float)(2*m_w + 2*m_h);
-//}
+

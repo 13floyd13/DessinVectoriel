@@ -1,5 +1,7 @@
 
+#include <istream>
 #include "forme.h"
+#include "cercle.h"
 
 using namespace std;
 
@@ -74,3 +76,19 @@ int Forme::GetFillColor() const {
 int Forme::GetThickness() const {
     return m_thickness;
 }
+/*void Forme::Save(std::ostream f, int forme) {
+    f.write((const char*)forme, sizeof(forme));
+    f.write((const char*)m_label, sizeof(m_label));
+    f.write((const char*)m_color, sizeof(m_color));
+    f.write((const char*)m_fillColor, sizeof(m_fillColor));
+    f.write((const char*)m_thickness, sizeof(m_thickness));
+}
+Forme* Forme::Load(std::istream f){
+    int a;
+    f.read((char*)a, sizeof(a));
+    Forme *forme;
+
+
+
+    return
+}*/

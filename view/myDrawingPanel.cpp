@@ -6,6 +6,7 @@
 #define WIDGET_Y_STEP		50
 
 
+#include <fstream>
 #include "myDrawingPanel.h"
 #include "myFrame.h"
 
@@ -115,6 +116,7 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 
 	OnDrawVector();
 
+
 	if (check)
 	{
 		wxString coordinates ;
@@ -127,13 +129,23 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 void MyDrawingPanel::OpenFile(wxString fileName)
 //------------------------------------------------------------------------
 {
-	// just to open (and close) any file
-	FILE* f = fopen(fileName, "r") ;
+	/*// just to open (and close) any file
+	std::vector<Forme*> tabForme;
+	std::ifstream f(fileName,std::ios::binary);
+
+	//FILE* f = fopen(fileName, "r") ;
 	if (f)
 	{
-		wxMessageBox(wxT("The file was opened then closed")) ;
-		fclose(f) ;
-	}
+
+		while(f){
+		    Forme* forme=Forme::Load(f);
+
+		    tabForme.push_back((forme));
+
+		}
+
+		f.close();
+	}*/
 }
 
 //------------------------------------------------------------------------
@@ -141,15 +153,23 @@ void MyDrawingPanel::SaveFile(wxString fileName)
 //------------------------------------------------------------------------
 {
 	// just to create a tiny file
-	FILE* f = fopen(fileName, "w") ;
+   /* std::vector<Forme*> tabForme= m_draw.GetForm();
+
+	std::ostream f(fileName,std::ios::binary);
 	if (!f)
 		wxMessageBox(wxT("Cannot save file"));
-	else
-	{
-		fprintf(f, "S1102 software can create and write a file") ;
-		wxMessageBox(wxT("The file was saved")) ;
-		fclose(f) ;
-	}
+	else {
+        //fprintf(f, "S1102 software can create and write a file") ;
+        for (auto it = tabForme.begin(); it != tabForme.end(); it++) {
+
+            (*it)->Save(f);
+
+
+            wxMessageBox(wxT("The file was saved"));
+            f.close();
+        }
+    }*/
+
 }
 void MyDrawingPanel::OnDrawRect(Rectangle rectangle){
     wxPaintDC dc(this);
@@ -170,6 +190,7 @@ void MyDrawingPanel::OnDrawCercle(Cercle cercle){
     wxPaintDC dc(this);
     // recup la valeur de l'épaisseur
     MyFrame* frame =  (MyFrame*)GetParent() ;
+
 
     wxColour penColor= cercle.GetColor();
     dc.SetPen(wxPen(penColor,cercle.GetThickness()));
@@ -237,3 +258,5 @@ void MyDrawingPanel::FormeSelection()
         it++;
     }
 }
+
+

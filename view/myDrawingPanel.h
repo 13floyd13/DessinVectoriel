@@ -28,6 +28,7 @@ public:
 	MyDrawingPanel( wxWindow *parent ) ;
 	void OpenFile(wxString fileName) ;
 	void SaveFile(wxString fileName) ;
+    void OnSave(wxString fileName);
 
 private:
 	void OnMouseMove(wxMouseEvent &event) ;
@@ -38,6 +39,7 @@ private:
 	void OnDrawCercle(Cercle cercle);
     void OnDrawVector();
     void FormeSelection();
+
 	wxPoint m_mousePoint ;
 	wxPoint m_onePoint ;
 	Draw m_draw;

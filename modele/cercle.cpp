@@ -4,7 +4,8 @@
 
 #define _USE_MATH_DEFINES   // To include PI value
 #include <math.h>
-
+#include <fstream>
+#include <iostream>
 
 
 Cercle::Cercle(Point centre, int radius, std::string label, int color, int fillColor, int thickness) :
@@ -13,9 +14,6 @@ Cercle::Cercle(Point centre, int radius, std::string label, int color, int fillC
         m_radius(radius){}
 
 
-/*Cercle::Cercle()
-{
-}*/
 
 // constructeur de copie
 Cercle::Cercle(const Cercle &other) : Forme(*other.m_label,other.m_color,other.m_fillColor, other.m_thickness), m_center(other.m_center), m_radius(other.m_radius)
@@ -24,35 +22,7 @@ Cercle::Cercle(const Cercle &other) : Forme(*other.m_label,other.m_color,other.m
 Cercle::~Cercle()
 {}
 
-Cercle &Cercle::operator=(const Cercle &other)
-{
-    if (this == &other) return *this;
 
-    *m_label = *other.m_label;
-    m_color = other.m_color;
-    m_fillColor=other.m_fillColor;
-    m_thickness = other.m_thickness;
-    m_center = other.m_center;
-    m_radius = other.m_radius;
-    return *this;
-}
-
-
-float Cercle::Surface() const
-{
-    return m_radius * m_radius * (float)M_PI;
-}
-
-float Cercle::Perimeter() const
-{
-    return m_radius * (float)M_PI * 2.f;
-}
-
-
-/*void Cercle::Display(MyDrawingPanel drawingPanel) const
-{
-    drawingPanel.OnDrawCercle(this);
-}*/
 bool Cercle::IsInside(int x, int y) const {
     int xCentre= this->GetCentre().GetX();
     int yCentre= this->GetCentre().GetY();
@@ -70,6 +40,33 @@ const Point & Cercle::GetCentre() const {
 const int Cercle::GetRadius() const{
     return m_radius;
 }
+
+/*void Cercle::Save(std::ostream f) {
+    /*try
+    {
+
+        //std::ofstream fichier_sortant (chemin.c_str(), std::ios::binary);
+
+       // f.write ((char*) this, sizeof (*this));
+        super::Save(f,1);
+
+        m_center.Save(f);
+        f.write((const char*)&m_radius, sizeof(m_radius));
+    /*}
+   /* catch (const char *exception)
+    {
+        std::cerr << "\n*** " << exception << " ***\n";
+    }
+    catch (...)
+    {
+        std::cerr << "\n*** Une erreur s'est produite ! ***\n";
+    }
+}
+
+void Cercle::Load()
+{
+
+}*/
 
 void Cercle::SetCenter(Point p) {
     m_center = p;
