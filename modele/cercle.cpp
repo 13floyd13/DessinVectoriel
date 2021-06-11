@@ -27,7 +27,7 @@ bool Cercle::IsInside(int x, int y) const {
     int xCentre= this->GetCentre().GetX();
     int yCentre= this->GetCentre().GetY();
 
-    int distance= sqrt(x-xCentre)*(x-xCentre)+(y-yCentre)*(y-yCentre);
+    int distance= sqrt((x-xCentre)*(x-xCentre)+(y-yCentre)*(y-yCentre));
     if(distance < this->GetRadius()){
         return true;
     } else{
@@ -40,6 +40,7 @@ const Point & Cercle::GetCentre() const {
 const int Cercle::GetRadius() const{
     return m_radius;
 }
+
 /*void Cercle::Save(std::ostream f) {
     /*try
     {
@@ -66,3 +67,7 @@ void Cercle::Load()
 {
 
 }*/
+
+void Cercle::SetCenter(Point p) {
+    m_center = p;
+}

@@ -43,8 +43,6 @@ void MyDrawingPanel::OnMouseMove(wxMouseEvent &event)
 	if (m_pressed) {
         MyFrame* frame =  (MyFrame*)GetParent() ;
 
-
-
         int color=frame->GetControlPanel()->GetPenColour().GetRGB();
         int fillColor=frame->GetControlPanel()->GetBrushColour().GetRGB();
 
@@ -56,7 +54,9 @@ void MyDrawingPanel::OnMouseMove(wxMouseEvent &event)
 	    } else if (shape == "Cercle") {
 	        int radius = (int)sqrt((m_mousePoint.x-m_onePoint.x)*(m_mousePoint.x-m_onePoint.x)+(m_mousePoint.y-m_onePoint.y)*(m_mousePoint.y-m_onePoint.y));
             OnDrawCercle(Cercle(Point(m_onePoint.x, m_onePoint.y), radius,"cercle" , color, fillColor,thickness));
-	    }
+	    } if (shape == "Selection") {
+            FormeSelection();
+        }
 	}
 }
 
@@ -68,13 +68,6 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
     m_pressed = true;
 	m_onePoint.x = event.m_x ;
 	m_onePoint.y = event.m_y ;
-    MyFrame* frame =  (MyFrame*)GetParent() ;
-    wxString shape = frame->GetControlPanel()->GetComboBoxValue();
-    if (shape == "Selection") {
-        FormeSelection();
-    }
-
-
 
     Refresh() ; // send an event that calls the OnPaint method
 }
@@ -86,7 +79,6 @@ void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
 {
     m_pressed = false;
     MyFrame* frame =  (MyFrame*)GetParent() ;
-
 
     int color=frame->GetControlPanel()->GetPenColour().GetRGB();
     int fillColor=frame->GetControlPanel()->GetBrushColour().GetRGB();
@@ -123,7 +115,6 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 	dc.SetPen(wxPen(m_colour));
 
 	OnDrawVector();
-
 
 
 	if (check)
@@ -185,12 +176,8 @@ void MyDrawingPanel::OnDrawRect(Rectangle rectangle){
     // recup la valeur de l'épaisseur
     MyFrame* frame =  (MyFrame*)GetParent() ;
 
-
-
-
     wxColour penColor= rectangle.GetColor();
     dc.SetPen(wxPen(penColor,rectangle.GetThickness()));
-
 
     wxColour brushColor= rectangle.GetFillColor();
     dc.SetBrush(wxBrush(brushColor));
@@ -208,7 +195,6 @@ void MyDrawingPanel::OnDrawCercle(Cercle cercle){
     wxColour penColor= cercle.GetColor();
     dc.SetPen(wxPen(penColor,cercle.GetThickness()));
 
-
     wxColour brushColor= cercle.GetFillColor();
     dc.SetBrush(wxBrush(brushColor));
 
@@ -219,7 +205,6 @@ void MyDrawingPanel::OnDrawCercle(Cercle cercle){
 
 void MyDrawingPanel::OnDrawVector()
 {
-
 
     std::vector<Forme*> tabForme = m_draw.GetForm();
     for (auto it = tabForme.begin(); it != tabForme.end(); it++) {
@@ -242,14 +227,35 @@ void MyDrawingPanel::FormeSelection()
         if ((*it)->GetLabel() == "rectangle") {
             Rectangle *r = dynamic_cast<Rectangle*>(*it);
             if (r->IsInside(m_onePoint.x, m_onePoint.y)) {
-                std::cout << "dedans" << std::endl;
-                r->SetWidth(r->GetWidth()+20);
+
+                Point corner = r->GetCorner();
+                int c_x = corner.GetX() + (m_mousePoint.x - m_onePoint.x);
+                int c_y = corner.GetY() + (m_mousePoint.y - m_onePoint.y);
+                r->SetCorner(Point(c_x,c_y));
+
+                // changement de onePoint pour garder le calcul linéraire
+                m_onePoint.x = m_mousePoint.x;
+                m_onePoint.y = m_mousePoint.y;
+
                 notSelected = false;
-            } else {
-                std::cout << "dehors" << std::endl;
+            }
+        } else if ((*it)->GetLabel() == "cercle") {
+            Cercle *c = dynamic_cast<Cercle *>(*it);
+            if (c->IsInside(m_onePoint.x, m_onePoint.y)) {
+
+                Point centre = c->GetCentre();
+                int c_x = centre.GetX() + (m_mousePoint.x - m_onePoint.x);
+                int c_y = centre.GetY() + (m_mousePoint.y - m_onePoint.y);
+                c->SetCenter(Point(c_x,c_y));
+
+                // changement de onePoint pour garder le calcul linéraire
+                m_onePoint.x = m_mousePoint.x;
+                m_onePoint.y = m_mousePoint.y;
+
+                notSelected = false;
             }
         }
-        it--;
+        it++;
     }
 }
 

@@ -44,6 +44,7 @@ private:
 	wxPoint m_onePoint ;
 	Draw m_draw;
 	bool m_pressed;
+	Forme *m_formeSelect;
 };
 
 #endif
