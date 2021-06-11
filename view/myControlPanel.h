@@ -30,7 +30,6 @@ public:
     wxString GetComboBoxValue() {return m_comboBox->GetValue();}
 
 private:
-	void OnButton(wxCommandEvent &event) ;
 	void OnSlider(wxScrollEvent &event) ;
 	void OnCheckBox(wxCommandEvent &event) ;
     void OnPenColorChange(wxColourPickerEvent &event);

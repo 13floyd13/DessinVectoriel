@@ -33,11 +33,7 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	SetSize(wxRect(wxPoint(0,0), wxPoint(WIDGET_PANEL_WIDTH, h))) ;
 	SetBackgroundColour(*wxLIGHT_GREY) ;
 
-	y = WIDGET_Y0 ;
-	m_button = new wxButton(this, ID_BUTTON1, wxT("Click Me"), wxPoint(10, y)) ;
-	Bind(wxEVT_BUTTON, &MyControlPanel::OnButton, this, ID_BUTTON1) ;
-
-	y+= WIDGET_Y_STEP ;
+	y= WIDGET_Y0 ;
 	m_checkBox = new wxCheckBox(this, ID_CHECKBOX1, "Show (x,y)", wxPoint(10, y), wxSize(100,20)) ;
 	Bind(wxEVT_CHECKBOX, &MyControlPanel::OnCheckBox, this, ID_CHECKBOX1) ;
 
@@ -45,7 +41,7 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
     wxStaticText* text1 = new wxStaticText(this, wxID_ANY, wxT("Epaisseur : "), wxPoint(10, y)) ;
 
     y+= 15 ;
-    m_slider = new wxSlider(this, ID_SLIDER1, 1, 1, 50, wxPoint(10, y), wxSize(100,20)) ;
+    m_slider = new wxSlider(this, ID_SLIDER1, 3, 0, 50, wxPoint(10, y), wxSize(100,20)) ;
     Bind(wxEVT_SCROLL_THUMBTRACK, &MyControlPanel::OnSlider, this, ID_SLIDER1) ;
 
 	// ajout des colorpickers
@@ -67,16 +63,6 @@ MyControlPanel::MyControlPanel(wxWindow *parent) : wxPanel(parent)
 	y+= WIDGET_Y_STEP;
 	m_comboBox = new wxComboBox(this, ID_COMBOBOX1, wxT("Rectangle"), wxPoint(10, y), wxDefaultSize, m_shapes, wxCB_READONLY);
 	Bind(wxEVT_COMBOBOX, &MyControlPanel::OnShapeChoose, this, ID_COMBOBOX1);
-}
-
-//------------------------------------------------------------------------
-void MyControlPanel::OnButton(wxCommandEvent &event)
-//------------------------------------------------------------------------
-{
-//	char* s = GetCString() ;
-//	wxMessageBox(wxString::FromAscii(s)) ; // call a C function located in the sample.cp module
-//	free(s) ;
-//	wxMessageBox(wxT("You just pressed the button!")) ;
 }
 
 //------------------------------------------------------------------------
