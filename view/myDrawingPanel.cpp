@@ -6,6 +6,7 @@
 #define WIDGET_Y_STEP		50
 
 
+#include <fstream>
 #include "myDrawingPanel.h"
 #include "myFrame.h"
 
@@ -43,10 +44,7 @@ void MyDrawingPanel::OnMouseMove(wxMouseEvent &event)
         MyFrame* frame =  (MyFrame*)GetParent() ;
 
 
-        //std::string colorStr= colorWxString.ToStdString();
 
-        //wxString fillColorWxString=frame->GetControlPanel()->GetBrushColour().GetAsString(wxC2S_HTML_SYNTAX);
-        //std::string fillColorStr= fillColorWxString.ToStdString();
         int color=frame->GetControlPanel()->GetPenColour().GetRGB();
         int fillColor=frame->GetControlPanel()->GetBrushColour().GetRGB();
 
@@ -76,8 +74,7 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
         FormeSelection();
     }
 
-//    Rectangle rect(m_onePoint.x, m_onePoint.y, m_onePoint.x-m_mousePoint.x, m_onePoint.y-m_mousePoint.y, "l");
-//    OnDrawRect(rect);
+
 
     Refresh() ; // send an event that calls the OnPaint method
 }
@@ -90,11 +87,7 @@ void MyDrawingPanel::OnMouseLeftUp(wxMouseEvent &event)
     m_pressed = false;
     MyFrame* frame =  (MyFrame*)GetParent() ;
 
-   /* wxString colorWxString=frame->GetControlPanel()->GetPenColour().GetAsString(wxC2S_HTML_SYNTAX);
-    std::string colorStr= colorWxString.ToStdString();
 
-    wxString fillColorWxString=frame->GetControlPanel()->GetBrushColour().GetAsString(wxC2S_HTML_SYNTAX);
-    std::string fillColorStr= fillColorWxString.ToStdString();*/
     int color=frame->GetControlPanel()->GetPenColour().GetRGB();
     int fillColor=frame->GetControlPanel()->GetBrushColour().GetRGB();
     int thickness = frame->GetControlPanel()->GetSliderValue();
@@ -122,10 +115,7 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 	int radius = frame->GetControlPanel()->GetSliderValue() ;
 	bool check = frame->GetControlPanel()->GetCheckBoxValue() ;
     wxColour m_colour = frame->GetControlPanel()->GetPenColour();
-									// Pour stocker la couleur sous forme de string: wxString colorWxString=frame->GetControlPanel()->GetColour().GetAsString(wxC2S_HTML_SYNTAX);
-									// on cast en une string std::string colorStr= colorstr.ToStdString()
-									//Pour récup la couleur on la cast de nouveau wxColour m_colour= static_cast<const wxString &>(colorStr);
-									//dc.SetPen(wxPen(m_colour));
+
 	// then paint
 	wxPaintDC dc(this);
 
@@ -134,9 +124,7 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 
 	OnDrawVector();
 
-//	dc.DrawLine(m_mousePoint, m_onePoint) ;
-//	dc.DrawRectangle(wxPoint(m_onePoint.x-radius/2, m_onePoint.y-radius/2), wxSize(radius,radius)) ;
-//	dc.DrawCircle(wxPoint(m_mousePoint), radius/2) ;
+
 
 	if (check)
 	{
@@ -150,13 +138,23 @@ void MyDrawingPanel::OnPaint(wxPaintEvent &event)
 void MyDrawingPanel::OpenFile(wxString fileName)
 //------------------------------------------------------------------------
 {
-	// just to open (and close) any file
-	FILE* f = fopen(fileName, "r") ;
+	/*// just to open (and close) any file
+	std::vector<Forme*> tabForme;
+	std::ifstream f(fileName,std::ios::binary);
+
+	//FILE* f = fopen(fileName, "r") ;
 	if (f)
 	{
-		wxMessageBox(wxT("The file was opened then closed")) ;
-		fclose(f) ;
-	}
+
+		while(f){
+		    Forme* forme=Forme::Load(f);
+
+		    tabForme.push_back((forme));
+
+		}
+
+		f.close();
+	}*/
 }
 
 //------------------------------------------------------------------------
@@ -164,29 +162,36 @@ void MyDrawingPanel::SaveFile(wxString fileName)
 //------------------------------------------------------------------------
 {
 	// just to create a tiny file
-	FILE* f = fopen(fileName, "w") ;
+   /* std::vector<Forme*> tabForme= m_draw.GetForm();
+
+	std::ostream f(fileName,std::ios::binary);
 	if (!f)
 		wxMessageBox(wxT("Cannot save file"));
-	else
-	{
-		fprintf(f, "S1102 software can create and write a file") ;
-		wxMessageBox(wxT("The file was saved")) ;
-		fclose(f) ;
-	}
+	else {
+        //fprintf(f, "S1102 software can create and write a file") ;
+        for (auto it = tabForme.begin(); it != tabForme.end(); it++) {
+
+            (*it)->Save(f);
+
+
+            wxMessageBox(wxT("The file was saved"));
+            f.close();
+        }
+    }*/
+
 }
 void MyDrawingPanel::OnDrawRect(Rectangle rectangle){
     wxPaintDC dc(this);
     // recup la valeur de l'épaisseur
     MyFrame* frame =  (MyFrame*)GetParent() ;
 
-//    std::cout << rectangle.GetCorner().GetX() << "," << rectangle.GetCorner().GetY() << std::endl;
-//    std::cout << rectangle.GetCorner().GetX()+rectangle.GetWidth() << "," << rectangle.GetCorner().GetY()+rectangle.GetHeight() << std::endl;
 
-    //wxColour penColor = static_cast<const wxString &>(rectangle.GetColor());
+
+
     wxColour penColor= rectangle.GetColor();
     dc.SetPen(wxPen(penColor,rectangle.GetThickness()));
 
-   // wxColour brushColor = static_cast<const wxString &>(rectangle.GetFillColor());
+
     wxColour brushColor= rectangle.GetFillColor();
     dc.SetBrush(wxBrush(brushColor));
 
@@ -199,11 +204,11 @@ void MyDrawingPanel::OnDrawCercle(Cercle cercle){
     // recup la valeur de l'épaisseur
     MyFrame* frame =  (MyFrame*)GetParent() ;
 
-    //wxColour penColor = static_cast<const wxString &>(cercle.GetColor());
+
     wxColour penColor= cercle.GetColor();
     dc.SetPen(wxPen(penColor,cercle.GetThickness()));
 
-    //wxColour brushColor = static_cast<const wxString &>(cercle.GetFillColor());
+
     wxColour brushColor= cercle.GetFillColor();
     dc.SetBrush(wxBrush(brushColor));
 
@@ -214,15 +219,7 @@ void MyDrawingPanel::OnDrawCercle(Cercle cercle){
 
 void MyDrawingPanel::OnDrawVector()
 {
-//    std::vector<Rectangle> tabRect = m_draw.GetRect();
-//    for (auto it = tabRect.begin(); it != tabRect.end(); it++) {
-//        OnDrawRect(*it);
-//    }
-//
-//    std::vector<Cercle> tabCercle = m_draw.GetCercle();
-//    for (auto it = tabCercle.begin(); it != tabCercle.end(); it++) {
-//        OnDrawCercle(*it);
-//    }
+
 
     std::vector<Forme*> tabForme = m_draw.GetForm();
     for (auto it = tabForme.begin(); it != tabForme.end(); it++) {
@@ -255,3 +252,5 @@ void MyDrawingPanel::FormeSelection()
         it--;
     }
 }
+
+

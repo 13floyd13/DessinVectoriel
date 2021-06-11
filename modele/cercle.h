@@ -13,6 +13,7 @@ class Cercle : public Forme
 public:
 
     //Cercle();
+    typedef Forme super;
     Cercle(const Cercle &other);
     Cercle(Point centre, int radius, std::string label, int color, int fillColor, int thickness);
 
@@ -20,13 +21,12 @@ public:
     virtual ~Cercle();
 
 
-    Cercle &operator=(const Cercle &other);
-
     const Point & GetCentre() const;
     const int GetRadius() const;
     bool IsInside(int x, int y) const;
-    virtual float Surface() const override;
-    virtual float Perimeter() const override;
+
+   // virtual void Save(std::ostream f,int type);
+//    virtual static void Load(std:: istream f);
   //  virtual void Display(MyDrawingPanel drawingPanel) const override;
 
 private:    // Could be protected

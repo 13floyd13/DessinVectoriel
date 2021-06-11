@@ -1,6 +1,8 @@
 #ifndef __POINT_H__
 #define __POINT_H__
 
+#include <iosfwd>
+
 //-------------------------------------------
 class Point
 //-------------------------------------------
@@ -18,7 +20,8 @@ public:
     int GetX() const;
     int GetY() const;
 
-
+    void Save(std::ostream f);
+    static Point Load(std::istream f);
     float Distance(const Point &p) const;
     float Distance(const Point *p) const;
 

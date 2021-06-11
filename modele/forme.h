@@ -2,7 +2,7 @@
 #define __FORME_H__
 
 #include <string>
-
+#include <ostream>
 
 
 class Forme
@@ -35,7 +35,10 @@ public:
 
     virtual float Surface() const { return 0.0f; }
     virtual float Perimeter() const { return 0.0f; }
+   // virtual void Save(std::ostream f, int forme);
+    //virtual void Load(std::ostream f){}
 
+static Forme* Load(std:: istream f);
 protected:
     std::string * m_label;
     int m_color;
