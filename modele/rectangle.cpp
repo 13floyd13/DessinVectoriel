@@ -1,10 +1,10 @@
 #include <cmath>
 #include "rectangle.h"
 
-Rectangle::Rectangle(int x, int y, int w, int h, const std::string& label, const std::string& color, const std::string& fillColor) :
+Rectangle::Rectangle(int x, int y, int w, int h, const std::string& label, const std::string& color, const std::string& fillColor, int thickness) :
 // Appel du constructeur de Forme avec un label
 
-        Forme(label,color,fillColor)
+        Forme(label,color,fillColor,thickness)
 //-------------------------------------------
 // attention, cette version appelle le constructeur par d�faut de Point
 // comme le compilateur ne l?a pas cr��, il faut le rajouter dans Point
@@ -18,8 +18,8 @@ Rectangle::Rectangle(int x, int y, int w, int h, const std::string& label, const
 }
 
 //-------------------------------------------
-Rectangle::Rectangle(const Point& p, int w, int h, const std::string& label, const std::string& color, const std::string& fillColor) :
-        Forme(label,color,fillColor),
+Rectangle::Rectangle(const Point& p, int w, int h, const std::string& label, const std::string& color, const std::string& fillColor, int thickness) :
+        Forme(label,color,fillColor, thickness),
         m_corner(p.GetX(),p.GetY()),
         m_w(w),
         m_h(h){}
