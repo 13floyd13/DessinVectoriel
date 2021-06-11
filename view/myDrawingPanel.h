@@ -37,6 +37,7 @@ private:
 	void OnDrawRect(Rectangle rect);
 	void OnDrawCercle(Cercle cercle);
     void OnDrawVector();
+    void FormeSelection();
 	wxPoint m_mousePoint ;
 	wxPoint m_onePoint ;
 	Draw m_draw;

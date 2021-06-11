@@ -70,6 +70,11 @@ void MyDrawingPanel::OnMouseLeftDown(wxMouseEvent &event)
     m_pressed = true;
 	m_onePoint.x = event.m_x ;
 	m_onePoint.y = event.m_y ;
+    MyFrame* frame =  (MyFrame*)GetParent() ;
+    wxString shape = frame->GetControlPanel()->GetComboBoxValue();
+    if (shape == "Selection") {
+        FormeSelection();
+    }
 
 //    Rectangle rect(m_onePoint.x, m_onePoint.y, m_onePoint.x-m_mousePoint.x, m_onePoint.y-m_mousePoint.y, "l");
 //    OnDrawRect(rect);
@@ -174,8 +179,8 @@ void MyDrawingPanel::OnDrawRect(Rectangle rectangle){
     // recup la valeur de l'épaisseur
     MyFrame* frame =  (MyFrame*)GetParent() ;
 
-    std::cout << rectangle.GetCorner().GetX() << "," << rectangle.GetCorner().GetY() << std::endl;
-    std::cout << rectangle.GetCorner().GetX()+rectangle.GetWidth() << "," << rectangle.GetCorner().GetY()+rectangle.GetHeight() << std::endl;
+//    std::cout << rectangle.GetCorner().GetX() << "," << rectangle.GetCorner().GetY() << std::endl;
+//    std::cout << rectangle.GetCorner().GetX()+rectangle.GetWidth() << "," << rectangle.GetCorner().GetY()+rectangle.GetHeight() << std::endl;
 
     //wxColour penColor = static_cast<const wxString &>(rectangle.GetColor());
     wxColour penColor= rectangle.GetColor();
@@ -228,5 +233,25 @@ void MyDrawingPanel::OnDrawVector()
             Cercle *c = dynamic_cast<Cercle *>(*it);
             OnDrawCercle(*c);
         }
+    }
+}
+
+void MyDrawingPanel::FormeSelection()
+{
+    std::vector<Forme*> tabForme = m_draw.GetForm();
+    bool notSelected = true;
+    auto it = tabForme.rbegin();
+    while (it != tabForme.rend() && notSelected) {
+        if ((*it)->GetLabel() == "rectangle") {
+            Rectangle *r = dynamic_cast<Rectangle*>(*it);
+            if (r->IsInside(m_onePoint.x, m_onePoint.y)) {
+                std::cout << "dedant" << std::endl;
+                r->SetWidth(r->GetWidth()+20);
+                notSelected = false;
+            } else {
+                std::cout << "dehors" << std::endl;
+            }
+        }
+        it--;
     }
 }

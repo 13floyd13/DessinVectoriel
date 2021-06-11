@@ -136,20 +136,15 @@ bool Rectangle::IsInside(int x,int y) const {
         yMax = rectYoppose;
     }
 
-    /*if (x < xMin || x > xMax || y < yMin || y > yMax) {
-        return false;
-    } else {
-        return true;
-    }*/
     return !(x < xMin || x > xMax || y < yMin || y > yMax);
 }
 
-float Rectangle::Surface() const
-{
-    return (float)(m_w * m_h);
-}
-
-float Rectangle::Perimeter() const
-{
-    return (float)(2*m_w + 2*m_h);;
-}
+//float Rectangle::Surface() const
+//{
+//    return (float)(m_w * m_h);
+//}
+//
+//float Rectangle::Perimeter() const
+//{
+//    return (float)(2*m_w + 2*m_h);
+//}
