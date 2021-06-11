@@ -9,8 +9,8 @@
 
 class Rectangle: public Forme{
 public:
-    Rectangle(int x, int y, int w,int h, const std::string& label, const std::string& color, const std::string& fillColor, int thickness);
-    Rectangle(const Point& p, int w, int h, const std::string& label, const std::string& color, const std::string& fillColor, int thickness);
+    Rectangle(int x, int y, int w,int h, const std::string& label, int color, int fillColor, int thickness);
+    Rectangle(const Point& p, int w, int h, const std::string& label, int color, int fillColor, int thickness);
     ~Rectangle();
 
     void SetCorner(const Point& p);

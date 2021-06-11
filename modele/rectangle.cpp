@@ -1,7 +1,7 @@
 #include <cmath>
 #include "rectangle.h"
 
-Rectangle::Rectangle(int x, int y, int w, int h, const std::string& label, const std::string& color, const std::string& fillColor, int thickness) :
+Rectangle::Rectangle(int x, int y, int w, int h, const std::string& label, int color, int fillColor, int thickness) :
 // Appel du constructeur de Forme avec un label
 
         Forme(label,color,fillColor,thickness)
@@ -18,7 +18,7 @@ Rectangle::Rectangle(int x, int y, int w, int h, const std::string& label, const
 }
 
 //-------------------------------------------
-Rectangle::Rectangle(const Point& p, int w, int h, const std::string& label, const std::string& color, const std::string& fillColor, int thickness) :
+Rectangle::Rectangle(const Point& p, int w, int h, const std::string& label, int color, int fillColor, int thickness) :
         Forme(label,color,fillColor, thickness),
         m_corner(p.GetX(),p.GetY()),
         m_w(w),
@@ -111,36 +111,38 @@ bool Rectangle::IsInside(const Rectangle &r) const
 }*/
 
 bool Rectangle::IsInside(int x,int y) const {
-   int rectX= this->GetCorner().GetX();
-   int rectY= this->GetCorner().GetY();
-   int rectXoppose= rectX+ this->GetWidth();
-   int rectYoppose= rectY+ this->GetHeight();
-   int xMin=0;
-   int xMax=0;
-   int yMin=0;
-   int yMax=0;
+    int rectX = this->GetCorner().GetX();
+    int rectY = this->GetCorner().GetY();
+    int rectXoppose = rectX + this->GetWidth();
+    int rectYoppose = rectY + this->GetHeight();
+    int xMin = 0;
+    int xMax = 0;
+    int yMin = 0;
+    int yMax = 0;
 
-   if(rectX > rectXoppose){
-       xMin=rectXoppose;
-       xMax=rectX;
-   }else{
-       xMin=rectX;
-       xMax=rectXoppose;
-   }
+    if (rectX > rectXoppose) {
+        xMin = rectXoppose;
+        xMax = rectX;
+    } else {
+        xMin = rectX;
+        xMax = rectXoppose;
+    }
 
-   if(rectY > rectYoppose){
-       yMin=rectYoppose;
-       yMax=rectY;
-   }else{
-       yMin=rectY;
-       yMax=rectYoppose;
-   }
+    if (rectY > rectYoppose) {
+        yMin = rectYoppose;
+        yMax = rectY;
+    } else {
+        yMin = rectY;
+        yMax = rectYoppose;
+    }
 
-   if(x<xMin || x>xMax || y<yMin || y>yMax){
-       return false;
-   }else{
-       return true;
-   }
+    /*if (x < xMin || x > xMax || y < yMin || y > yMax) {
+        return false;
+    } else {
+        return true;
+    }*/
+    return !(x < xMin || x > xMax || y < yMin || y > yMax);
+}
 
 float Rectangle::Surface() const
 {

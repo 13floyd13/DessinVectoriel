@@ -14,7 +14,7 @@ public:
 
     //Cercle();
     Cercle(const Cercle &other);
-    Cercle(Point centre, int radius, std::string label, std::string color, std::string fillColor, int thickness);
+    Cercle(Point centre, int radius, std::string label, int color, int fillColor, int thickness);
 
 
     virtual ~Cercle();
